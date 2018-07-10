@@ -7,4 +7,11 @@
 ```shell
  composer install
  yarn install
+ php bin/console doctrine:fixtures:load
+```
+
+## Test: 
+
+```shell
+./bin/phpunit
 ```

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Idea
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,7 +22,13 @@ class Idea
      */
     private $title;
 
-    public function getId()
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User",cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -34,6 +41,18 @@ class Idea
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
