@@ -1,4 +1,6 @@
-# seller
+# Seller
+
+[![Build Status](https://travis-ci.org/scristofari/seller.svg?branch=master)](https://travis-ci.org/scristofari/seller)
 
 ## Installation: 
 
