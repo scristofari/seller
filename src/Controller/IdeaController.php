@@ -56,7 +56,7 @@ class IdeaController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $idea = $entityManager
           ->getRepository(Idea::class)
-          ->findBySlug($slug);
+          ->findOneBySlug($slug);
 
         $form = $this->createForm(IdeaType::class, $idea);
         $form->handleRequest($request);

@@ -31,18 +31,12 @@ class IdeaRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function findBySlug($slug)
+    public function findOneBySlug($slug)
     {
-        $qb = $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('i')
           ->where('i.slug = :slug')
           ->setParameter('slug', $slug)
-          ->getQuery();
-
-        $r = $qb->execute();
-        // getFirstResult()
-        if (empty($r)) {
-            return null;
-        }
-        return $r[0];
+          ->getQuery()
+          ->getOneOrNullResult();
     }
 }
