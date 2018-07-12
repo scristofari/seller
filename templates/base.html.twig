@@ -8,8 +8,8 @@
     </head>
     <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">Idées</a>
-            <button type="button" class="btn btn-success">Créer une idée</button>
+            <a class="navbar-brand" href="{{ path('home') }}">Idées</a>
+            <a class="btn btn-success" href="{{ path('idea_create') }}">Créer une idée</a>
         </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

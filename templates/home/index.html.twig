@@ -12,7 +12,7 @@
             Il n'y a pas d'idées pour le moment.
         {% endif %}
         {% for idea in ideas %}
-            <li>{{ idea.title|e }} par {{ idea.user.username }}</li>
+            <li><a href="{{ path('idea_update', { 'slug': idea.slug }) }}">{{ idea.title|e }} par {{ idea.user.username }}</a></li>
         {% endfor %}
     </ul>
 

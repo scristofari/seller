@@ -23,4 +23,25 @@ class IdeaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Idea::class);
     }
+
+    /**
+     * Retrieve Idea by slug.
+     *
+     * @param $slug
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug)
+    {
+        $qb = $this->createQueryBuilder('i')
+          ->where('i.slug = :slug')
+          ->setParameter('slug', $slug)
+          ->getQuery();
+
+        $r = $qb->execute();
+        if (empty($r)) {
+            return null;
+        }
+        return $r[0];
+    }
 }

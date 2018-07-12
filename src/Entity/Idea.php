@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IdeaRepository")
@@ -19,6 +21,8 @@ class Idea
     private $id;
 
     /**
+     *
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -69,7 +73,7 @@ class Idea
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
 
