@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class IdeaFixtures extends Fixture
 {
-
     public function load(ObjectManager $manager)
     {
         $user = new User();
