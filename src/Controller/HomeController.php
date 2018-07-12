@@ -14,6 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /* @todo use KnpPaginatorBundle to paginate. */
         $ideas = $this->getDoctrine()
           ->getRepository(Idea::class)
           ->findAll();

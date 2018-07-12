@@ -1,12 +1,10 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste d'idées!{% endblock %}
-
 {% block body %}
 
 <div class="container">
-    <h1>Modifier une idée.</h1>
+    <h1>{{ "ideas.update"|trans }}</h1>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}

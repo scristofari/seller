@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste d'idées!{% endblock %}
+{% block title %}
+    {{ "ideas.list"|trans }}
+{% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <h1>Liste des idées</h1>
+    <h1>{{ "ideas.list"|trans }}</h1>
 
     <ul>
         {% if ideas is empty %}

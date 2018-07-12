@@ -39,6 +39,7 @@ class IdeaRepository extends ServiceEntityRepository
           ->getQuery();
 
         $r = $qb->execute();
+        // getFirstResult()
         if (empty($r)) {
             return null;
         }

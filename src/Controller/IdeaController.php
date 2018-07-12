@@ -32,6 +32,7 @@ class IdeaController extends Controller
             $user = (new UserFactory())->create($security->getUser());
             $idea->setUser($user);
 
+            /* @todo create a service to save / update an idea. */
             $em = $this->getDoctrine()->getManager();
             $em->persist($idea);
             $em->flush();
@@ -68,7 +69,7 @@ class IdeaController extends Controller
         }
 
         return $this->render(
-          'idea/create.html.twig',
+          'idea/update.html.twig',
           [
             'form' => $form->createView(),
           ]
