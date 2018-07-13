@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Idea;
 use App\Factory\UserFactory;
 use App\Form\IdeaType;
+use App\Manager\IdeaManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +20,7 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/create", name="idea_create")
      */
-    public function create(Request $request, Security $security)
-    {
+    public function create(Request $request, Security $security) {
         $form = $this->createForm(IdeaType::class);
         $form->handleRequest($request);
 
@@ -53,17 +53,20 @@ class IdeaController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        /* @TODO Use param converter to handle this. */
         $entityManager = $this->getDoctrine()->getManager();
         $idea = $entityManager
           ->getRepository(Idea::class)
           ->findOneBySlug($slug);
+        if (null === $idea) {
+            $this->createNotFoundException("Idea not found.");
+        }
 
         $form = $this->createForm(IdeaType::class, $idea);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            ;
+            $em = $this->getDoctrine()->getManager();;
             $em->flush();
 
             return $this->redirectToRoute('home');

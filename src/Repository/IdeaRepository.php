@@ -25,11 +25,12 @@ class IdeaRepository extends ServiceEntityRepository
     }
 
     /**
-     * Retrieve Idea by slug.
+     * Retrieve an idea by slug.
      *
      * @param $slug
      *
      * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneBySlug($slug)
     {
