@@ -24,6 +24,7 @@ class IdeaController extends Controller
         $form = $this->createForm(IdeaType::class);
         $form->handleRequest($request);
 
+        /* @todo create a service for the form / Single responsibility */
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var \App\Entity\Idea $idea */
             $idea = $form->getData();
