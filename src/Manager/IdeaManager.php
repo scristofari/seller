@@ -3,8 +3,9 @@
 namespace App\Manager;
 
 use App\Entity\Idea;
+use App\Repository\IdeaRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\EntityNotFoundException;
 
 /**
  * Class IdeaManager
@@ -13,13 +14,15 @@ use Doctrine\ORM\ORMException;
  */
 class IdeaManager
 {
-
     /** @var EntityManager */
     private $em;
 
-    public function __constructor(EntityManager $entityManager)
-    {
-        $this->em = $entityManager;
+    /** @var IdeaRepository */
+    private $repository;
+
+    public function __constructor(EntityManager $em, IdeaRepository $ir) {
+        $this->em = $em;
+        $this->repository = $ir;
     }
 
     /**
@@ -34,5 +37,25 @@ class IdeaManager
     {
         $this->em->persist($idea);
         $this->em->flush();
+    }
+
+    /**
+     * Find an idea by slug.
+     *
+     * @param \App\Entity\Idea $idea
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws EntityNotFoundException
+     *
+     * @return Idea
+     */
+    public function findBySlug($slug)
+    {
+        $idea = $this->repository->findOneBySlug($slug);
+        if (null === $idea) {
+            throw new EntityNotFoundException("Idea not found");
+        }
+
+        return $idea;
     }
 }
