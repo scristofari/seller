@@ -28,10 +28,7 @@ class IdeaController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var \App\Entity\Idea $idea */
             $idea = $form->getData();
-
-            /* @todo use FOS USER, will duplicate user. */
-            $user = (new UserFactory())->create($security->getUser());
-            $idea->setUser($user);
+            $idea->setUser($security->getUser());
 
             /* @todo create a service to save / update an idea. */
             $em = $this->getDoctrine()->getManager();
