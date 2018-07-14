@@ -28,7 +28,6 @@ class IdeaController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var \App\Entity\Idea $idea */
             $idea = $form->getData();
-            $idea->setUser($security->getUser());
 
             /* @todo create a service to save / update an idea. */
             $em = $this->getDoctrine()->getManager();
@@ -49,7 +48,7 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/update/{slug}", name="idea_update")
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, Security $security, $slug)
     {
         /* @TODO Use param converter to handle this. */
         $entityManager = $this->getDoctrine()->getManager();
@@ -64,7 +63,7 @@ class IdeaController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();;
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
 
             return $this->redirectToRoute('home');

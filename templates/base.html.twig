@@ -9,7 +9,12 @@
     <body>
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="{{ path('home') }}">Idées</a>
-            <a class="btn btn-success" href="{{ path('idea_create') }}">Créer une idée</a>
+            {% if app.user %}
+                <a class="btn btn-success" href="{{ path('idea_create') }}">Créer une idée</a>
+                <a class="btn btn-default" href="{{ path('logout') }}">Logout</a>
+            {% else %}
+                <a class="btn btn-success" href="{{ path('login') }}">Login</a>
+            {% endif %}
         </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
